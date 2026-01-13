@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+// TODO: Replace with MongoDB API calls
 import { 
   DollarSign, 
   Plus, 
@@ -35,11 +35,17 @@ export default function CostTracker() {
 
   const { data: expenses = [], isLoading } = useQuery({
     queryKey: ['expenses'],
-    queryFn: () => base44.entities.Expense.list('-date')
+    queryFn: () => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve([]);
+    }
   });
 
   const createMutation = useMutation({
-    mutationFn: (data) => base44.entities.Expense.create(data),
+    mutationFn: (data) => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve(data);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['expenses']);
       setIsAddOpen(false);
@@ -55,7 +61,10 @@ export default function CostTracker() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.Expense.delete(id),
+    mutationFn: (id) => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve();
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['expenses']);
     }

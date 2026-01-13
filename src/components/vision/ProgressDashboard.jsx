@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+// TODO: Replace with MongoDB API calls
 import { DollarSign, Users, Package, Repeat, Edit2, Save, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -21,11 +21,8 @@ export default function ProgressDashboard({ progressData, isLoading }) {
 
   const updateMutation = useMutation({
     mutationFn: async (data) => {
-      if (progressData?.id) {
-        return await base44.entities.VisionProgress.update(progressData.id, data);
-      } else {
-        return await base44.entities.VisionProgress.create(data);
-      }
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve(data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['visionProgress']);

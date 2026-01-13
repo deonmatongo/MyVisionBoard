@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+// TODO: Replace with MongoDB API calls
 import { Trophy, Plus, Calendar, Tag, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -26,17 +26,8 @@ export default function Accomplishments({ progressData }) {
       const accomplishments = progressData?.accomplishments || [];
       const newAccomplishments = [...accomplishments, data];
       
-      if (progressData?.id) {
-        return await base44.entities.VisionProgress.update(progressData.id, {
-          accomplishments: newAccomplishments
-        });
-      } else {
-        return await base44.entities.VisionProgress.create({
-          accomplishments: newAccomplishments,
-          current_revenue: 0,
-          active_clients: 0
-        });
-      }
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve({ accomplishments: newAccomplishments });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['visionProgress']);
@@ -54,9 +45,8 @@ export default function Accomplishments({ progressData }) {
     mutationFn: async (index) => {
       const accomplishments = [...(progressData?.accomplishments || [])];
       accomplishments.splice(index, 1);
-      return await base44.entities.VisionProgress.update(progressData.id, {
-        accomplishments
-      });
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve({ accomplishments });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['visionProgress']);

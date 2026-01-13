@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+// TODO: Replace with MongoDB API calls
 import { 
   BookOpen, 
   Plus, 
@@ -50,11 +50,17 @@ export default function LearningDevelopment() {
 
   const { data: learningItems = [], isLoading } = useQuery({
     queryKey: ['learning'],
-    queryFn: () => base44.entities.LearningItem.list('-created_date')
+    queryFn: () => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve([]);
+    }
   });
 
   const createMutation = useMutation({
-    mutationFn: (data) => base44.entities.LearningItem.create(data),
+    mutationFn: (data) => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve(data);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['learning']);
       setIsAddOpen(false);
@@ -63,21 +69,30 @@ export default function LearningDevelopment() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.LearningItem.update(id, data),
+    mutationFn: ({ id, data }) => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve({ id, ...data });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['learning']);
     }
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.LearningItem.delete(id),
+    mutationFn: (id) => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve();
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['learning']);
     }
   });
 
   const createCalendarMutation = useMutation({
-    mutationFn: (data) => base44.entities.CalendarEvent.create(data),
+    mutationFn: (data) => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve(data);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['events']);
       setIsCalendarOpen(false);

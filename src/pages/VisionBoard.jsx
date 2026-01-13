@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+// TODO: Replace with MongoDB API calls
 import VisionHeader from '@/components/vision/VisionHeader';
 import VisionHero from '@/components/vision/VisionHero';
 import ProgressDashboard from '@/components/vision/ProgressDashboard';
@@ -32,8 +32,9 @@ export default function VisionBoard() {
   const { data: progressData, isLoading } = useQuery({
     queryKey: ['visionProgress'],
     queryFn: async () => {
-      const results = await base44.entities.VisionProgress.list();
-      return results[0] || null;
+      // TODO: Replace with MongoDB API call
+      // Example: const results = await fetch('/api/visionprogress').then(r => r.json());
+      return null;
     }
   });
 

@@ -81,8 +81,8 @@ export default function ServicesCards() {
             <div>
               <h3 className="text-2xl font-bold mb-4">Tech Advantage</h3>
               <p className="text-slate-400 leading-relaxed">
-                Using <span className="text-white font-medium">Base44</span> for rapid, high-quality frontend development 
-                combined with custom backend solutions for scalability.
+                Built with modern React and MongoDB for rapid, high-quality development 
+                combined with scalable backend solutions.
               </p>
             </div>
             <div>

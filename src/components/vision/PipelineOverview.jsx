@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+// TODO: Replace with MongoDB API calls
 import { 
   Briefcase, 
   Plus, 
@@ -41,11 +41,17 @@ export default function PipelineOverview() {
 
   const { data: projects = [], isLoading } = useQuery({
     queryKey: ['projectPipeline'],
-    queryFn: () => base44.entities.ProjectPipeline.list('-created_date')
+    queryFn: () => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve([]);
+    }
   });
 
   const createMutation = useMutation({
-    mutationFn: (data) => base44.entities.ProjectPipeline.create(data),
+    mutationFn: (data) => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve(data);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['projectPipeline']);
       setIsAddOpen(false);
@@ -54,7 +60,10 @@ export default function PipelineOverview() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.ProjectPipeline.update(id, data),
+    mutationFn: ({ id, data }) => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve({ id, ...data });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['projectPipeline']);
       setEditingProject(null);
@@ -63,7 +72,10 @@ export default function PipelineOverview() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.ProjectPipeline.delete(id),
+    mutationFn: (id) => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve();
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['projectPipeline']);
     }

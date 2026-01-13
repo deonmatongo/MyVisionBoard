@@ -1,8 +1,6 @@
-# Base44 App
+# Vision Board App
 
-
-This app was created automatically by Base44.
-It's a Vite+React app that communicates with the Base44 API.
+A comprehensive vision board application built with Vite and React.
 
 ## Running the app
 
@@ -17,4 +15,6 @@ npm run dev
 npm run build
 ```
 
-For more information and support, please contact Base44 support at app@base44.com.
+## Database
+
+This application uses MongoDB for data storage. See `MONGODB_SCHEMA.md` for database schema and query documentation.

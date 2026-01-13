@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+// TODO: Replace with MongoDB API calls
 import { ChevronRight, Check, Target, Trophy } from 'lucide-react';
 
 export default function QuarterlyRoadmap({ progressData }) {
@@ -22,17 +22,8 @@ export default function QuarterlyRoadmap({ progressData }) {
       quarterProgress[taskIndex] = !quarterProgress[taskIndex];
       currentProgress[quarterKey] = quarterProgress;
       
-      if (progressData?.id) {
-        return await base44.entities.VisionProgress.update(progressData.id, {
-          quarter_progress: currentProgress
-        });
-      } else {
-        return await base44.entities.VisionProgress.create({
-          quarter_progress: currentProgress,
-          current_revenue: 0,
-          active_clients: 0
-        });
-      }
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve({ quarter_progress: currentProgress });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['visionProgress']);

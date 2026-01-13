@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+// TODO: Replace with MongoDB API calls
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { 
@@ -38,14 +38,19 @@ export default function ProjectDetail() {
   const { data: project, isLoading } = useQuery({
     queryKey: ['ongoingProject', projectId],
     queryFn: async () => {
-      const projects = await base44.entities.OngoingProject.list();
-      return projects.find(p => p.id === projectId);
+      // TODO: Replace with MongoDB API call
+      // Example: const project = await fetch(`/api/ongoingprojects/${projectId}`).then(r => r.json());
+      return null;
     },
     enabled: !!projectId
   });
 
   const updateMutation = useMutation({
-    mutationFn: (data) => base44.entities.OngoingProject.update(projectId, data),
+    mutationFn: (data) => {
+      // TODO: Replace with MongoDB API call
+      // Example: return fetch(`/api/ongoingprojects/${projectId}`, { method: 'PUT', body: JSON.stringify(data) }).then(r => r.json());
+      return Promise.resolve();
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['ongoingProject', projectId]);
       queryClient.invalidateQueries(['ongoingProjects']);

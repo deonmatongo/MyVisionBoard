@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+// TODO: Replace with MongoDB API calls
 import { 
   Calendar as CalendarIcon, 
   Plus, 
@@ -37,11 +37,17 @@ export default function CalendarView() {
 
   const { data: events = [], isLoading } = useQuery({
     queryKey: ['calendarEvents'],
-    queryFn: () => base44.entities.CalendarEvent.list('-date')
+    queryFn: () => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve([]);
+    }
   });
 
   const createMutation = useMutation({
-    mutationFn: (data) => base44.entities.CalendarEvent.create(data),
+    mutationFn: (data) => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve(data);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['calendarEvents']);
       setIsAddOpen(false);
@@ -57,15 +63,20 @@ export default function CalendarView() {
   });
 
   const toggleCompleteMutation = useMutation({
-    mutationFn: ({ id, completed }) => 
-      base44.entities.CalendarEvent.update(id, { completed }),
+    mutationFn: ({ id, completed }) => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve({ id, completed });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['calendarEvents']);
     }
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.CalendarEvent.delete(id),
+    mutationFn: (id) => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve();
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['calendarEvents']);
     }

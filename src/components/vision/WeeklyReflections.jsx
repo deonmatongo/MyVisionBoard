@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+// TODO: Replace with MongoDB API calls
 import { BookOpen, Plus, Calendar, TrendingUp, AlertCircle, Target, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -25,17 +25,8 @@ export default function WeeklyReflections({ progressData }) {
       const weekly_notes = progressData?.weekly_notes || [];
       const newNotes = [data, ...weekly_notes];
       
-      if (progressData?.id) {
-        return await base44.entities.VisionProgress.update(progressData.id, {
-          weekly_notes: newNotes
-        });
-      } else {
-        return await base44.entities.VisionProgress.create({
-          weekly_notes: newNotes,
-          current_revenue: 0,
-          active_clients: 0
-        });
-      }
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve({ weekly_notes: newNotes });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['visionProgress']);
@@ -53,9 +44,8 @@ export default function WeeklyReflections({ progressData }) {
     mutationFn: async (index) => {
       const weekly_notes = [...(progressData?.weekly_notes || [])];
       weekly_notes.splice(index, 1);
-      return await base44.entities.VisionProgress.update(progressData.id, {
-        weekly_notes
-      });
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve({ weekly_notes });
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['visionProgress']);

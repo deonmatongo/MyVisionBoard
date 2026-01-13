@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+// TODO: Replace with MongoDB API calls
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { 
@@ -38,22 +38,28 @@ export default function OngoingProjectsList() {
 
   const { data: projects = [], isLoading } = useQuery({
     queryKey: ['ongoingProjects'],
-    queryFn: () => base44.entities.OngoingProject.list('-created_date')
+    queryFn: () => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve([]);
+    }
   });
 
   const createMutation = useMutation({
-    mutationFn: (data) => base44.entities.OngoingProject.create({
-      ...data,
-      progress_percentage: 0,
-      stages: [
-        { name: 'Discovery & Planning', completed: false, notes: '' },
-        { name: 'Design', completed: false, notes: '' },
-        { name: 'Development', completed: false, notes: '' },
-        { name: 'Testing', completed: false, notes: '' },
-        { name: 'Deployment', completed: false, notes: '' }
-      ],
-      tasks: []
-    }),
+    mutationFn: (data) => {
+      // TODO: Replace with MongoDB API call
+      return Promise.resolve({
+        ...data,
+        progress_percentage: 0,
+        stages: [
+          { name: 'Discovery & Planning', completed: false, notes: '' },
+          { name: 'Design', completed: false, notes: '' },
+          { name: 'Development', completed: false, notes: '' },
+          { name: 'Testing', completed: false, notes: '' },
+          { name: 'Deployment', completed: false, notes: '' }
+        ],
+        tasks: []
+      });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['ongoingProjects']);
       setIsAddOpen(false);
