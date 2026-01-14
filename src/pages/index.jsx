@@ -39,9 +39,11 @@ function PagesContent() {
                     <Route path="/" element={<VisionBoard />} />
                 
                 
-                <Route path="/VisionBoard" element={<VisionBoard />} />
+                <Route path="/visionboard" element={<VisionBoard />} />
                 
-                <Route path="/ProjectDetail" element={<ProjectDetail />} />
+                <Route path="/projectdetail" element={<ProjectDetail />} />
+
+                <Route path="*" element={<VisionBoard />} />
                 
             </Routes>
         </Layout>
